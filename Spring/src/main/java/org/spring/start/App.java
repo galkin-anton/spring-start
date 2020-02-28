@@ -13,6 +13,11 @@
  */
 package org.spring.start;
 
+import org.spring.start.beans.Client;
+import org.spring.start.loggers.ConsoleEventLogger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 /**
  * Project: SpringStart
  * Author: Galkin A.B.
@@ -25,10 +30,15 @@ public class App {
     private Client client;
     private ConsoleEventLogger eventLogger;
 
+    public App(Client client, ConsoleEventLogger eventLogger) {
+        this.client = client;
+        this.eventLogger = eventLogger;
+    }
+
     public static void main(String[] args) {
-        App app = new App();
-        app.client = new Client("John Smith", "1");
-        app.eventLogger = new ConsoleEventLogger();
+        //ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+        App app = (App) ctx.getBean(App.class);
 
         app.logEvent("some event for user 1");
     }

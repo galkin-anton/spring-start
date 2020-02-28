@@ -11,18 +11,18 @@
  *
  * $
  */
-package org.spring.start;
+package org.spring.start.loggers;
+
+import org.spring.start.event.Event;
 
 /**
  * Project: SpringStart
  * Author: Galkin A.B.
- * Date: 27.02.2020
- * Time: 17:14
+ * Date: 28.02.2020
+ * Time: 10:30
  * Descriptions
  */
 
-public class ConsoleEventLogger {
-    public void logEvent(String msg) {
-        System.out.println(msg);
-    }
+public interface EventLogger {
+    void logEvent(Event event);
 }

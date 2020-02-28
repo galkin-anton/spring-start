@@ -11,11 +11,9 @@
  *
  * $
  */
-package org.spring.start;
+package org.spring.start.loggers;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
+import org.spring.start.event.Event;
 
 /**
  * Project: SpringStart
@@ -24,11 +22,9 @@ import lombok.NonNull;
  * Time: 17:14
  * Descriptions
  */
-@Builder(toBuilder = true)
-@Data
-public class Client {
-    @NonNull
-    private String fullName;
-    @NonNull
-    private String id;
+
+public class ConsoleEventLogger implements EventLogger {
+    public void logEvent(Event event) {
+        System.out.println(event);
+    }
 }
