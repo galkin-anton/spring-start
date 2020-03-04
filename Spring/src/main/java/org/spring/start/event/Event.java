@@ -14,7 +14,9 @@
 package org.spring.start.event;
 
 import lombok.Data;
+import lombok.NonNull;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 /**
@@ -28,5 +30,12 @@ import java.util.Date;
 public class Event {
     private int id;
     private String msg;
+    @NonNull
     private Date date;
+    @NonNull
+    private DateFormat df;
+
+    public String toString() {
+        return df.format(date);
+    }
 }

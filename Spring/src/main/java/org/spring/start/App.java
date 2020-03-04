@@ -14,6 +14,7 @@
 package org.spring.start;
 
 import org.spring.start.beans.Client;
+import org.spring.start.event.Event;
 import org.spring.start.loggers.ConsoleEventLogger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -29,22 +30,25 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class App {
     private Client client;
     private ConsoleEventLogger eventLogger;
+    private Event event;
 
-    public App(Client client, ConsoleEventLogger eventLogger) {
+    public App(Client client, ConsoleEventLogger eventLogger, Event event) {
         this.client = client;
         this.eventLogger = eventLogger;
+        this.event = event;
     }
 
     public static void main(String[] args) {
         //ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
-        App app = (App) ctx.getBean(App.class);
+        App app = ctx.getBean(App.class);
+        app.event = ctx.getBean(Event.class);
 
         app.logEvent("some event for user 1");
     }
 
     private void logEvent(String msg) {
         String message = msg.replaceAll(client.getId(), client.getFullName());
-        eventLogger.logEvent(message);
+        eventLogger.logEvent(event);
     }
 }

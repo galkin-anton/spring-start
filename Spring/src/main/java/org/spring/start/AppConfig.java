@@ -14,9 +14,13 @@
 package org.spring.start;
 
 import org.spring.start.beans.Client;
+import org.spring.start.event.Event;
 import org.spring.start.loggers.ConsoleEventLogger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.text.DateFormat;
+import java.util.Date;
 
 /**
  * Project: SpringStart
@@ -39,7 +43,10 @@ public class AppConfig {
     }
 
     @Bean
+    public Event event() {return new Event(new Date(), DateFormat.getDateTimeInstance());}
+
+    @Bean
     public App app() {
-        return new App(client(), eventLogger());
+        return new App(client(), eventLogger(), event());
     }
 }

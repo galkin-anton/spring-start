@@ -9,11 +9,21 @@
         <constructor-arg index="1" value="1"/>
     </bean>
 
-    <bean id="eventLogger" class="org.spring.start.loggers.ConsoleEventLogger"/>
+    <bean id="eventLogger" class="org.spring.start.loggers.ConsoleEventLogger" scope="prototype"/>
+
+    <bean id="event" class="org.spring.start.event.Event" scope="prototype">
+        <constructor-arg>
+            <bean class="java.util.Date"/>
+        </constructor-arg>
+        <constructor-arg ref="dateFormat"/>
+    </bean>
+
+    <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
 
     <bean id="app" class="org.spring.start.App">
         <constructor-arg ref="client"/>
         <constructor-arg ref="eventLogger"/>
+        <constructor-arg ref="event"/>
     </bean>
 
 </beans>

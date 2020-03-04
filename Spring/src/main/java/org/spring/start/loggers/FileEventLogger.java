@@ -13,18 +13,25 @@
  */
 package org.spring.start.loggers;
 
+import lombok.Data;
+import org.apache.commons.io.FileUtils;
 import org.spring.start.event.Event;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
  * Project: SpringStart
  * Author: Galkin A.B.
- * Date: 28.02.2020
- * Time: 10:30
+ * Date: 03.03.2020
+ * Time: 10:36
  * Descriptions
  */
+@Data
+public class FileEventLogger implements EventLogger {
+    private String fileName;
 
-public interface EventLogger {
-    void logEvent(Event event) throws IOException;
+    public void logEvent(Event event) throws IOException {
+        FileUtils.writeStringToFile(new File(fileName), event.toString(), true);
+    }
 }
