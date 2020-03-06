@@ -9,7 +9,7 @@
         <constructor-arg index="1" value="1"/>
     </bean>
 
-    <bean id="eventLogger" class="org.spring.start.loggers.ConsoleEventLogger" scope="prototype"/>
+    <bean id="consoleEventLogger" class="org.spring.start.loggers.ConsoleEventLogger" scope="prototype"/>
 
     <bean id="event" class="org.spring.start.event.Event" scope="prototype">
         <constructor-arg>
@@ -23,14 +23,14 @@
         <constructor-arg index="0" value="Log.txt"/>
     </bean>
 
-    <bean id="fileEventLogger" class="org.spring.start.loggers.CashFileEventLogger" init-method="init">
+    <bean id="cashFileEventLogger" class="org.spring.start.loggers.CashFileEventLogger" init-method="init">
             <constructor-arg index="0" value="Log.txt"/>
-            <constructor-arg index="1" value="5"/>
+            <constructor-arg index="1" value="1"/>
         </bean>
 
     <bean id="app" class="org.spring.start.App">
         <constructor-arg ref="client"/>
-        <constructor-arg ref="eventLogger"/>
+        <constructor-arg ref="cashFileEventLogger"/>
         <constructor-arg ref="event"/>
     </bean>
 

@@ -36,6 +36,7 @@ public class CashFileEventLogger extends FileEventLogger {
     public CashFileEventLogger(@NonNull String fileName, int casheSize) {
         super(fileName);
         this.casheSize = casheSize;
+        //this.cashe = new List<>();
     }
 
     public void logEvent(Event event) throws IOException {

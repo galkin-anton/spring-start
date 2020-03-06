@@ -38,7 +38,7 @@ public class FileEventLogger implements EventLogger {
         this.file = new File(fileName);
         //проверка на права записи в файл
         if (!file.canWrite()) {
-            throw new IOException();
+            throw new IOException(file.getAbsolutePath());
         }
     }
 
