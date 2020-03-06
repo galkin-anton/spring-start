@@ -13,40 +13,43 @@
  */
 package org.spring.start.loggers;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NonNull;
-import org.apache.commons.io.FileUtils;
 import org.spring.start.event.Event;
 
-import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Project: SpringStart
  * Author: Galkin A.B.
- * Date: 03.03.2020
- * Time: 10:36
+ * Date: 06.03.2020
+ * Time: 16:49
  * Descriptions
  */
-@Data
-public class FileEventLogger implements EventLogger {
-    @NonNull
-    private String fileName;
-    private File file;
 
-    public void init() throws IOException {
-        this.file = new File(fileName);
-        //проверка на права записи в файл
-        if (!file.canWrite()) {
-            throw new IOException();
-        }
+@Getter
+public class CashFileEventLogger extends FileEventLogger {
+    private int casheSize;
+    private List<Event> cashe;
+
+    public CashFileEventLogger(@NonNull String fileName, int casheSize) {
+        super(fileName);
+        this.casheSize = casheSize;
     }
 
     public void logEvent(Event event) throws IOException {
-        writeEventToFile(event);
+        cashe.add(event);
+
+        if (cashe.size() == casheSize) {
+            writeEventsFromCashe();
+            cashe.clear();
+        }
     }
 
-    public void writeEventToFile(Event event) throws IOException {
-        FileUtils.writeStringToFile(file, event.toString(), true);
+    private void writeEventsFromCashe() throws IOException {
+        for (Event e : cashe) {
+            writeEventToFile(e);
+        }
     }
 }

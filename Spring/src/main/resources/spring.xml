@@ -19,6 +19,14 @@
     </bean>
 
     <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
+    <bean id="fileEventLogger" class="org.spring.start.loggers.FileEventLogger" init-method="init">
+        <constructor-arg index="0" value="Log.txt"/>
+    </bean>
+
+    <bean id="fileEventLogger" class="org.spring.start.loggers.CashFileEventLogger" init-method="init">
+            <constructor-arg index="0" value="Log.txt"/>
+            <constructor-arg index="1" value="5"/>
+        </bean>
 
     <bean id="app" class="org.spring.start.App">
         <constructor-arg ref="client"/>
