@@ -44,13 +44,14 @@ public class App {
         //ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
         ApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
         App app = ctx.getBean(App.class);
-        app.event = ctx.getBean(Event.class);
+        //app.event = ctx.getBean(Event.class);
 
         app.logEvent("some event for user 1");
     }
 
     private void logEvent(String msg) throws IOException {
         String message = msg.replaceAll(client.getId(), client.getFullName());
+        event.setMsg(message + "\n");
         eventLogger.logEvent(event);
     }
 }

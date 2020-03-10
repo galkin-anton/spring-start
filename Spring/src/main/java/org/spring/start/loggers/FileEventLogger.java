@@ -36,6 +36,10 @@ public class FileEventLogger implements EventLogger {
 
     public void init() throws IOException {
         this.file = new File(fileName);
+        //Проверяем существует ли файл
+        if (!file.exists()) {
+            file.createNewFile();
+        }
         //проверка на права записи в файл
         if (!file.canWrite()) {
             throw new IOException(file.getAbsolutePath());

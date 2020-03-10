@@ -13,11 +13,11 @@
  */
 package org.spring.start.loggers;
 
-import lombok.Getter;
 import lombok.NonNull;
 import org.spring.start.event.Event;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,7 +28,6 @@ import java.util.List;
  * Descriptions
  */
 
-@Getter
 public class CashFileEventLogger extends FileEventLogger {
     private int casheSize;
     private List<Event> cashe;
@@ -36,7 +35,7 @@ public class CashFileEventLogger extends FileEventLogger {
     public CashFileEventLogger(@NonNull String fileName, int casheSize) {
         super(fileName);
         this.casheSize = casheSize;
-        //this.cashe = new List<>();
+        this.cashe = new ArrayList<>();
     }
 
     public void logEvent(Event event) throws IOException {

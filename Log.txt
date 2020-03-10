@@ -1,0 +1,2 @@
+[10.03.2020 12:34:49] some event for user John Smith
+[10.03.2020 12:35:01] some event for user John Smith

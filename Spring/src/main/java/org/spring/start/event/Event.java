@@ -36,6 +36,6 @@ public class Event {
     private DateFormat df;
 
     public String toString() {
-        return df.format(date);
+        return String.format("[%s] %s", df.format(date), msg);
     }
 }
